@@ -1,7 +1,16 @@
+import com.android.build.gradle.internal.res.processResources
+import com.google.protobuf.gradle.*
+
 plugins {
     id("com.android.application")
     kotlin("android")
     id ("kotlin-kapt")
+    //    Hilt
+    id("dagger.hilt.android.plugin")
+    id("kotlin-android")
+    id ("kotlin-parcelize")
+//    ProtoBuf
+    id ("com.google.protobuf" ) version "0.8.18"
 
 }
 
@@ -16,6 +25,7 @@ android {
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -51,15 +61,36 @@ android {
     }
 
 
+
 }
 
 dependencies {
 
     implementBasicAndroid()
-//    implementDependencyInjection()
+    implementDependencyInjection()
     implementAndroidX()
-//    implementDataBase()
+    implementDataBase()
 //    implementNetwork()
     implementTest()
     implementAndroidTest()
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.17.3"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins{
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+
+    kapt {
+        correctErrorTypes = true
+    }
+
 }

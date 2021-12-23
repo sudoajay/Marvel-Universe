@@ -10,6 +10,8 @@ buildscript {
     dependencies {
         classpath(Plugins.pluginBuildGradle)
         classpath(Plugins.pluginKotlinGradle)
+        classpath(Plugins.pluginDaggerHilt)
+
     }
 }
 

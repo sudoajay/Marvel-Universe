@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "com.oyelabs.marvel.universe";
+option java_multiple_files = true;
+
+message StatePreferences {
+  string darkMode = 1;
+}
