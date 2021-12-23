@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    App Theme Color-->
+    <color name="colorPrimaryDark">#121212</color>
+    <color name="colorPrimary">#121212</color>
+    <color name="colorAccent">#7DC4EC</color>
+
+    <color name="bgBoxColor">#171717</color>
+
+
+</resources>
