@@ -1,8 +1,9 @@
-package com.oyelabs.marvel.universe.proto
+package com.oyelabs.marvel.universe.main.proto
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
+import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.StatePreferences
 import javax.inject.Inject
 
@@ -10,24 +11,22 @@ class ProtoManager @Inject constructor (var context: Context){
     val dataStoreStatePreferences : DataStore<StatePreferences> = context.stateDataStore
 
 
-    suspend fun setDarkMode(darkMode: String) {
+    suspend fun setCurrentTheme(darkMode: String) {
         dataStoreStatePreferences.updateData { preferences ->
             preferences.toBuilder()
-                .setDarkMode(darkMode)
+                .setCurrentTheme(darkMode)
                 .build()
         }
     }
 
 
-//    suspend fun setDefaultValue(){
-//        dataStoreStatePreferences.updateData { preferences->
-//            preferences.toBuilder()
-//                .setDatabase(context.getString(R.string.no_dataBase_text))
-//                .setJsonConverter(context.getString(R.string.jacksonJson_text))
-//                .setImageLoader(context.getString(R.string.glide_text))
-//                .build()
-//        }
-//    }
+    suspend fun setDefaultValue(){
+        dataStoreStatePreferences.updateData { preferences->
+            preferences.toBuilder()
+                .setCurrentTheme(context.getString(R.string.system_default_text))
+                .build()
+        }
+    }
 
 
 

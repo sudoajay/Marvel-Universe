@@ -6,5 +6,8 @@
 
 <!--    Main Activity-->
     <color name="bgBoxColor">#ffffff</color>
+    <color name="mainBgColor">#59FFFFFF</color>
+    <color name="headingNormalTextColor">#353131</color>
+    <color name="swipeBgColor">#ffffff</color>
 
 </resources>

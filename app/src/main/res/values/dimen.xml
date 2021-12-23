@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--    BottomAppBar-->
+    <dimen name="toolbar_heigth">60dp</dimen>
+    <dimen name="toolbar_title_size">24sp</dimen>
+    <dimen name="progress_circular_dimension">48dp</dimen>
+
+
+
+
+</resources>

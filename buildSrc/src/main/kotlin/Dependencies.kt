@@ -23,6 +23,9 @@ class Dependencies {
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Dependencies.Lifecycle}"
         const val lifecycleRuntime =
             "androidx.lifecycle:lifecycle-runtime:${Versions.Dependencies.Lifecycle}"
+        const val lifecycleLiveData =
+            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Dependencies.Lifecycle}"
+
     }
 
     object Coroutine {

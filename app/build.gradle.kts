@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.res.processResources
 import com.google.protobuf.gradle.*
 
 plugins {
@@ -77,7 +76,7 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.17.3"
+        artifact = "com.google.protobuf:protoc:3.19.1"
     }
     generateProtoTasks {
         all().forEach { task ->

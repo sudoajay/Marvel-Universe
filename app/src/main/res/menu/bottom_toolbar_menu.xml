@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search_optionMenu"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search_optionMenu"
+        app:iconTint="@color/colorAccent"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/refresh_optionMenu"
+        android:title="@string/refresh_optionMenu" />
+
+
+    <item
+        android:id="@+id/darkMode_optionMenu"
+        android:title="@string/dark_mode_text" />
+
+
+</menu>

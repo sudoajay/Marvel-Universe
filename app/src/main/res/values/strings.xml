@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">Marvel Universe</string>
 
+    <!--    Main Activity -->
+    <string name="setting_text">Setting</string>
+    <!--  MainActivity  Bottom Toolbar-->
+    <string name="search_optionMenu">Search</string>
+    <string name="refresh_optionMenu">Refresh</string>
+
     <!--    Dark Mode -->
-    <string name="dark_mode_text" translatable="false">Dark Mode</string>
-    <string name="is_dark_mode_text" translatable="false">isDarkMode</string>
-    <string name="off_text" translatable="false">Off</string>
-    <string name="on_text" translatable="false">On</string>
-    <string name="automatic_at_sunset_text" translatable="false">Automatic at sunset</string>
-    <string name="set_by_battery_saver_text" translatable="false">Set by battery saver</string>
-    <string name="system_default_text" translatable="false">System Default</string>
+    <string name="dark_mode_text" >Dark Mode</string>
+    <string name="is_dark_mode_text" >isDarkMode</string>
+    <string name="off_text" >Off</string>
+    <string name="on_text" >On</string>
+    <string name="automatic_at_sunset_text" >Automatic at sunset</string>
+    <string name="set_by_battery_saver_text" >Set by battery saver</string>
+    <string name="system_default_text">System Default</string>
+
+
+
 </resources>

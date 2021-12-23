@@ -1,4 +1,4 @@
-package com.oyelabs.marvel.universe.proto
+package com.oyelabs.marvel.universe.main.proto
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer

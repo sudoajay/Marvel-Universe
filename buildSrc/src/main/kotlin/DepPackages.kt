@@ -7,7 +7,6 @@ fun DependencyHandler.implementBasicAndroid(){
     add("implementation", Dependencies.Androidx.AppCompat)
 //    android  Material
     add("implementation", Dependencies.Androidx.Material)
-//    android  ConstraintLayout        const val WebKit = "1.2.0"
 
     add("implementation", Dependencies.Androidx.ConstraintLayout)
 
@@ -22,9 +21,10 @@ fun DependencyHandler.implementDependencyInjection(){
 
 fun DependencyHandler.implementAndroidX(){
 
-    add("implementation", Dependencies.Androidx.webKit)
+//    add("implementation", Dependencies.Androidx.webKit)
     add("implementation", Dependencies.Lifecycle.viewModelKtx)
     add("implementation", Dependencies.Lifecycle.lifecycleRuntime)
+    add("implementation", Dependencies.Lifecycle.lifecycleLiveData)
     add("implementation",Dependencies.Coroutine.coroutineCore)
     add("implementation",Dependencies.Coroutine.coroutineAndroid)
     add("implementation",Dependencies.Androidx.swipeRefreshLayout)
@@ -39,7 +39,7 @@ fun DependencyHandler.implementDataBase(){
 //    add("implementation",Dependencies.Storage.RoomPaging3)
 //    add("implementation", Dependencies.Storage.paging)
 //    add("implementation", Dependencies.Storage.firebaseDatabase)
-//    add("implementation", Dependencies.Storage.preferenceDataStore)
+    add("implementation", Dependencies.Storage.preferenceDataStore)
     add("implementation", Dependencies.Storage.protoDataStore)
     add("implementation", Dependencies.Storage.protobuf)
 }

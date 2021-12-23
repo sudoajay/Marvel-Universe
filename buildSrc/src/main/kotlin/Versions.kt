@@ -13,7 +13,7 @@ object Versions {
     object MainDependencies{
         const val CoreKtx = "1.7.0"
         const val AppCompat = "1.4.0"
-        const val Material = "1.5.0-beta01"
+        const val Material = "1.4.0"
         const val ConstraintLayout ="2.1.2"
 
     }
@@ -24,7 +24,7 @@ object Versions {
     object Dependencies {
         const val Dagger_Hilt = "2.40.2"
         const val Android_Hilt = "1.0.0-alpha03"
-        const val Coroutine = "1.5.2"
+        const val Coroutine = "1.6.0"
         const val Lifecycle = "2.4.0"
         const val SwipeRefreshLayout = "1.1.0"
         const val WebKit = "1.2.0"

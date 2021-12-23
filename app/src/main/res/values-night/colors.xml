@@ -6,7 +6,11 @@
     <color name="colorPrimary">#121212</color>
     <color name="colorAccent">#7DC4EC</color>
 
+    <!--  Main  Activity-->
     <color name="bgBoxColor">#171717</color>
+    <color name="mainBgColor">#121212</color>
+    <color name="headingNormalTextColor">#dae1e7</color>
+    <color name="swipeBgColor">#121212</color>
 
 
 </resources>
