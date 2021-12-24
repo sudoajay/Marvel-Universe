@@ -22,4 +22,8 @@
     <color name="dialogBgColorInfo">#2546ABEB</color>
     <color name="systemInfoBgColor">#ffffff</color>
 
+
+<!--    Ui Grid View-->
+    <color name="transparentBlack">#9C000000</color>
+
 </resources>

@@ -65,11 +65,12 @@ android {
 
 dependencies {
 
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementBasicAndroid()
     implementDependencyInjection()
     implementAndroidX()
     implementDataBase()
-//    implementNetwork()
+    implementNetwork()
     implementTest()
     implementAndroidTest()
 }

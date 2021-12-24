@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityMainBinding
@@ -88,6 +89,8 @@ class MainActivity : BaseActivity() {
             binding.bottomAppBar.navigationIcon = it
         }
         setSupportActionBar(binding.bottomAppBar)
+
+        var gridlayout = GridLayoutManager(applicationContext,2,GridLayoutManager.VERTICAL,false)
 
 
     }

@@ -38,7 +38,7 @@ class Dependencies {
         const val RoomRuntime = "androidx.room:room-runtime:${Versions.Dependencies.Room}"
         const val RoomCompiler = "androidx.room:room-compiler:${Versions.Dependencies.Room}"
         const val RoomKtx = "androidx.room:room-ktx:${Versions.Dependencies.Room}"
-        const val RoomPaging3 = "androidx.room:room-paging:${Versions.Dependencies.RoomPaging3}"
+        const val RoomPaging3 = "androidx.room:room-paging:${Versions.Dependencies.Room}"
         const val paging ="androidx.paging:paging-runtime:${Versions.Dependencies.Paging}"
         const val firebaseDatabase = "com.google.firebase:firebase-database-ktx:${Versions.Dependencies.FirebaseDatabase}"
         const val preferenceDataStore = "androidx.datastore:datastore-preferences:${Versions.Dependencies.PreferencesDataStore}"
@@ -51,7 +51,6 @@ class Dependencies {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.Dependencies.Retrofit}"
         const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.Dependencies.Retrofit}"
         const val retrofitConverterJackson = "com.squareup.retrofit2:converter-jackson:${Versions.Dependencies.Retrofit}"
-        const val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.Dependencies.Retrofit}"
 
 //    Ok HTTP
         const val loggingInterceptor =
@@ -69,18 +68,14 @@ const val jacksonCore =
         const val jacksonDataBind =
             "com.fasterxml.jackson.core:jackson-databind:${Versions.Dependencies.JacksonJson}"
 
-        //  Moshi Json
-        const val moshiCore = "com.squareup.moshi:moshi:${Versions.Dependencies.MoshiJson}"
-        const val moshiCodegen =
-            "com.squareup.moshi:moshi-kotlin-codegen:${Versions.Dependencies.MoshiJson}"
 
-        //        Glide
+//        //        Glide
         const val glide = "com.github.bumptech.glide:glide:${Versions.Dependencies.Glide}"
         const val glideCompiler =
             "com.github.bumptech.glide:compiler:${Versions.Dependencies.Glide}"
-
-        //        Picasso
-        const val picasso = "com.squareup.picasso:picasso:${Versions.Dependencies.Picasso}"
+//
+//        //        Picasso
+//        const val picasso = "com.squareup.picasso:picasso:${Versions.Dependencies.Picasso}"
     }
     object Test {
         const val junit = "junit:junit:${Versions.Dependencies.Junit}"

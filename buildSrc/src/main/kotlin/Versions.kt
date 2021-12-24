@@ -31,8 +31,7 @@ object Versions {
         const val FragmentKTX = "1.3.6"
         const val ActivityKTX = "1.3.1"
 
-        const val Room = "2.3.0"
-        const val RoomPaging3= "2.4.0-alpha04"
+        const val Room = "2.4.0"
         const val Paging = "3.1.0"
         const val FirebaseDatabase = "20.0.2"
         const val PreferencesDataStore = "1.0.0"
@@ -43,7 +42,6 @@ object Versions {
         const val Okhttp = "4.9.3"
         const val GoogleGson = "2.8.9"
         const val JacksonJson = "2.13.0"
-        const val MoshiJson = "1.12.0"
         const val Glide = "4.12.0"
         const val Picasso = "2.8"
 
