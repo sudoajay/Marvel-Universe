@@ -45,7 +45,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dns1_TextInputLayoutEditText"
+                    android:id="@+id/TextInputLayoutEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="10"

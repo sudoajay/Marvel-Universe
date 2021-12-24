@@ -19,6 +19,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
@@ -54,6 +55,13 @@ class SendFeedback : BaseActivity() {
     }
 
     private fun reference() {
+
+        binding.feedbackEditText.editText?.doOnTextChanged { text, _, _, _ ->
+            if (!text.isNullOrBlank() )
+                binding.feedbackEditText.isErrorEnabled = false
+
+        }
+
 
         startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -123,6 +131,7 @@ class SendFeedback : BaseActivity() {
 
         return intent
     }
+
 
     fun onClickSendFeedBack(){
         if (binding.feedbackEditText.editText!!.text.isEmpty()) {
