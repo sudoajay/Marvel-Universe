@@ -1,4 +1,4 @@
-package com.oyelabs.marvel.universe.main
+package com.oyelabs.marvel.universe.main.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

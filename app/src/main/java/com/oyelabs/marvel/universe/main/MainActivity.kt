@@ -1,7 +1,7 @@
 package com.oyelabs.marvel.universe.main
 
+import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +14,8 @@ import androidx.databinding.DataBindingUtil
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityMainBinding
+import com.oyelabs.marvel.universe.main.viewModel.MainViewModel
+import com.oyelabs.marvel.universe.sendFeedback.SendFeedback
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -111,7 +113,7 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             android.R.id.home -> showNavigationDrawer()
             R.id.refresh_optionMenu -> {}
-            R.id.darkMode_optionMenu->{}
+            R.id.sendFeedBack_optionMenu->startActivity(Intent(applicationContext, SendFeedback::class.java))
             else -> return super.onOptionsItemSelected(item)
         }
 
@@ -121,6 +123,8 @@ class MainActivity : BaseActivity() {
     private fun showNavigationDrawer() {
 
     }
+
+
 
 
     fun openSetting() {

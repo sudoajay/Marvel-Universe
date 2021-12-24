@@ -6,6 +6,8 @@
     <!--  MainActivity  Bottom Toolbar-->
     <string name="search_optionMenu">Search</string>
     <string name="refresh_optionMenu">Refresh</string>
+    <string name="send_feedback_text">Send Feedback</string>
+
 
     <!--    Dark Mode -->
     <string name="dark_mode_text" >Dark Mode</string>
@@ -16,6 +18,38 @@
     <string name="set_by_battery_saver_text" >Set by battery saver</string>
     <string name="system_default_text">System Default</string>
 
+
+    <!--    Send Feedback-->
+    <string name="add_Screenshot_Small_text">Add Screenshot Small</string>
+    <string name="add_Screenshot_Large_text">Add Screenshot Large</string>
+    <string name="close_Image_text">Close Image</string>
+    <string name="feedbackEditTextHint">Please write your feedback</string>
+    <string name="feedbackEditTextError">Please write something in feedback</string>
+    <string name="systemInfo_text">Your System Info will be send to our developer team</string>
+    <string name="add_screenshot_text">+ Add Screenshot</string>
+    <string name="ok_text">OK</string>
+
+
+
+
+    <!--    System Info-->
+    <string name="system_info_text"> System Info </string>
+    <string name="device_text">Device : </string>
+    <string name="os_api_level_text">Os Api Level : </string>
+    <string name="language_text">Language : </string>
+    <string name="total_memory_text">Total Heap Memory : </string>
+    <string name="free_memory_text">Free Heap Memory : </string>
+    <string name="screen_Text">Screen Size : </string>
+    <string name="network_type_text">Network Type : </string>
+    <string name="app_version_text">App Version : </string>
+
+
+
+    <!--    Network Provider-->
+    <string name="wifi_text">Wifi</string>
+    <string name="mobile_data_text">Mobile Data</string>
+    <string name="vpn_text">Vpn</string>
+    <string name="no_internet_text">No Internet</string>
 
 
 </resources>

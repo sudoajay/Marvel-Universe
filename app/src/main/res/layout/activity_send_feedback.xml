@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.oyelabs.marvel.universe.sendFeedback.SendFeedback" />
+    </data>
+
+    <ScrollView
+        android:background="@color/mainBgColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            tools:context=".ui.sendFeedback.SendFeedback">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/feedback_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/feedbackEditTextHint"
+                android:textColorHint="@color/boxTextColor"
+                app:boxBackgroundColor="@color/bgBoxColor"
+                app:boxStrokeColor="@color/boxHoverColor"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="2dp"
+                app:counterTextColor="@color/errorBoxColor"
+                app:errorIconTint="@color/errorBoxColor"
+                app:errorTextColor="@color/errorBoxColor"
+                app:hintTextColor="@color/boxHoverColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dns1_TextInputLayoutEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/boxTextColor"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="6dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/image_Button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.5"
+                android:background="@drawable/feedback_background_button"
+                android:onClick="@{() ->activity.onClickImageManager() }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/feedback_EditText" />
+
+            <TextView
+                android:id="@+id/addScreenshot_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/add_screenshot_text"
+                android:textColor="@color/headingNormalTextColor"
+                android:textSize="26sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_Button"
+                app:layout_constraintEnd_toEndOf="@+id/image_Button"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/image_Button"
+                app:layout_constraintTop_toTopOf="@+id/image_Button"
+                app:layout_constraintVertical_bias="0.513" />
+
+            <ImageView
+                android:id="@+id/addScreenshotSmall_ImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:contentDescription="@string/add_Screenshot_Small_text"
+                app:layout_constraintBottom_toBottomOf="@+id/addScreenshot_TextView"
+                app:layout_constraintStart_toEndOf="@+id/addScreenshot_TextView"
+                app:layout_constraintTop_toTopOf="@+id/addScreenshot_TextView"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_image_small"
+                app:tint="@color/boxTextColor"
+                />
+
+            <ImageView
+                android:id="@+id/addScreenshotLarge_ImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:contentDescription="@string/add_Screenshot_Large_text"
+                app:layout_constraintBottom_toBottomOf="@+id/image_Button"
+                app:layout_constraintEnd_toEndOf="@+id/image_Button"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/image_Button"
+                app:layout_constraintTop_toTopOf="@+id/image_Button"
+                app:srcCompat="@drawable/ic_image_large"
+                app:tint="@color/boxTextColor"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/systemInfo_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/systemInfo_text"
+                android:textColor="@color/headingNormalTextColor"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_Button" />
+
+            <Button
+                android:id="@+id/sendFeedback_Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:onClick="@{() ->activity.onClickSendFeedBack() }"
+                android:background="@drawable/feedback_background_button"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/send_feedback_text"
+                android:textAllCaps="false"
+                android:textColor="@color/headingNormalTextColor"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/systemInfo_TextView" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</layout>

@@ -10,4 +10,12 @@
     <color name="headingNormalTextColor">#353131</color>
     <color name="swipeBgColor">#ffffff</color>
 
+    <!--    Send Feedback-->
+    <color name="boxTextColor">#353131</color>
+    <color name="boxHoverColor">#41a9e4</color>
+    <color name="errorBoxColor">#F44336</color>
+    <color name="feedbackBoxBgColor">#BEBEBE</color>
+    <color name="dialogBgColorInfo">#2546ABEB</color>
+    <color name="systemInfoBgColor">#ffffff</color>
+
 </resources>

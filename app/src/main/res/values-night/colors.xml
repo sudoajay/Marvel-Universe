@@ -4,7 +4,7 @@
     <!--    App Theme Color-->
     <color name="colorPrimaryDark">#121212</color>
     <color name="colorPrimary">#121212</color>
-    <color name="colorAccent">#7DC4EC</color>
+    <color name="colorAccent">#74A0EE</color>
 
     <!--  Main  Activity-->
     <color name="bgBoxColor">#171717</color>
@@ -12,5 +12,13 @@
     <color name="headingNormalTextColor">#dae1e7</color>
     <color name="swipeBgColor">#121212</color>
 
+
+    <!--    Send Feedback // Reminder -->
+    <color name="boxTextColor">#dae1e7</color>
+    <color name="boxHoverColor">#7DC4EC</color>
+    <color name="errorBoxColor">#CF6679</color>
+    <color name="feedbackBoxBgColor">#272727</color>
+    <color name="dialogBgColorInfo">#272727</color>
+    <color name="systemInfoBgColor">#171717</color>
 
 </resources>

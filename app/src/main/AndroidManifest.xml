@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.oyelabs.marvel.universe">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -20,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".BaseActivity"/>
+        <activity android:name=".sendFeedback.SendFeedback"/>
+
     </application>
 
 </manifest>
