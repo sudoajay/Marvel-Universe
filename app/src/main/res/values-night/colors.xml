@@ -11,6 +11,8 @@
     <color name="mainBgColor">#121212</color>
     <color name="headingNormalTextColor">#dae1e7</color>
     <color name="swipeBgColor">#121212</color>
+    <color name="fadeTextColor">#dae1e7</color>
+
 
 
     <!--    Send Feedback // Reminder -->

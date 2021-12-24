@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_dark_mode"
             app:backgroundTint="@color/bgBoxColor"
-            android:onClick="@{() -> activity.openSetting()}"
+            android:onClick="@{() -> activity.showDarkMode()}"
             app:fabSize="normal"
             app:layout_anchor="@id/bottomAppBar"
             app:tint="@color/colorAccent"

@@ -52,4 +52,24 @@
     <string name="no_internet_text">No Internet</string>
 
 
+    <!--    Navigation Drawer Bottom Sheet-->
+    <string name="developer_name">Created by Sudo Ajay</string>
+    <string name="rate_use_text">Rate-Us</string>
+    <string name="more_app_text">More App</string>
+    <string name="share_app_text">Share Apk</string>
+    <string name="workOnProgress_text">Work On Progress</string>
+
+<!--    Click back to exit-->
+    <string name="click_back_text">Click Back Again To Exit</string>
+
+
+    <!--    Dark Mode Bottom Sheet-->
+    <string name="dark_mode_trans_text">Dark Mode</string>
+    <string name="off_trans_text">Off</string>
+    <string name="on_trans_text">On</string>
+    <string name="automatic_at_sunset_trans_text">Automatic at sunset</string>
+    <string name="set_by_battery_saver_trans_text">Set by battery saver</string>
+    <string name="system_default_trans_text">System Default</string>
+
+
 </resources>

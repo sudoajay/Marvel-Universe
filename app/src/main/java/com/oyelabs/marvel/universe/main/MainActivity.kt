@@ -14,10 +14,19 @@ import androidx.databinding.DataBindingUtil
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityMainBinding
+import com.oyelabs.marvel.universe.databinding.LayoutDarkModeBottomSheetBinding
+import com.oyelabs.marvel.universe.helper.Toaster
+import com.oyelabs.marvel.universe.main.bottomSheet.DarkModeBottomSheet
+import com.oyelabs.marvel.universe.main.bottomSheet.NavigationDrawerBottomSheet
 import com.oyelabs.marvel.universe.main.viewModel.MainViewModel
 import com.oyelabs.marvel.universe.sendFeedback.SendFeedback
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -25,6 +34,12 @@ class MainActivity : BaseActivity() {
     val viewModel: MainViewModel by viewModels()
     lateinit var binding: ActivityMainBinding
     private var isDarkTheme: Boolean = false
+    private var doubleBackToExitPressedOnce = false
+
+    @Inject
+    lateinit var navigationDrawerBottomSheet : NavigationDrawerBottomSheet
+    @Inject
+    lateinit var darkModeBottomSheet:DarkModeBottomSheet
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,14 +136,41 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showNavigationDrawer() {
-
+        navigationDrawerBottomSheet.show(
+            supportFragmentManager.beginTransaction(),
+            navigationDrawerBottomSheet.tag
+        )
+    }
+    fun showDarkMode(){
+        darkModeBottomSheet.show(
+            supportFragmentManager.beginTransaction(),
+            darkModeBottomSheet.tag
+        )
     }
 
 
 
+    override fun onBackPressed() {
+        onBack()
+    }
 
-    fun openSetting() {
+    private fun onBack() {
+        if (doubleBackToExitPressedOnce) {
+            closeApp()
+            return
+        }
+        doubleBackToExitPressedOnce = true
+        Toaster.showToast(applicationContext, getString(R.string.click_back_text))
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(2000L)
+            doubleBackToExitPressedOnce = false
+        }
+    }
 
-
+    private fun closeApp() {
+        val homeIntent = Intent(Intent.ACTION_MAIN)
+        homeIntent.addCategory(Intent.CATEGORY_HOME)
+        homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(homeIntent)
     }
 }

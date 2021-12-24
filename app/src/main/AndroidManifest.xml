@@ -23,6 +23,10 @@
         <activity android:name=".BaseActivity"/>
         <activity android:name=".sendFeedback.SendFeedback"/>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

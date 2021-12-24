@@ -8,6 +8,14 @@
     <dimen name="progress_circular_dimension">48dp</dimen>
 
 
+    <!--    Navigation Drawer-->
+    <dimen name="text_view_margin_gap">12dp</dimen>
+    <dimen name="gap_margin_left_right">16dp</dimen>
+    <dimen name="divider_height">0.8dp</dimen>
+
+    <!--    Dark Bottom sheet-->
+    <dimen name="bootom_sheet_padding_bottom">32dp</dimen>
+
 
 
 </resources>

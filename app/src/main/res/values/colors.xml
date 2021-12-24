@@ -9,6 +9,10 @@
     <color name="mainBgColor">#59FFFFFF</color>
     <color name="headingNormalTextColor">#353131</color>
     <color name="swipeBgColor">#ffffff</color>
+    <color name="divider">#E6E6E6</color>
+    <color name="fadeTextColor">#5C5757</color>
+
+
 
     <!--    Send Feedback-->
     <color name="boxTextColor">#353131</color>
