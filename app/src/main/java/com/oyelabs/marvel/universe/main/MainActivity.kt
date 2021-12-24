@@ -62,6 +62,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        setReference()
     }
 
     private fun setReference() {
@@ -76,6 +77,16 @@ class MainActivity : BaseActivity() {
 //            refreshData()
         }
 
+        //         Setup BottomAppBar Navigation Setup
+        binding.bottomAppBar.navigationIcon?.mutate()?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.setTint(
+                    ContextCompat.getColor(applicationContext, R.color.colorAccent)
+                )
+            }
+            binding.bottomAppBar.navigationIcon = it
+        }
+        setSupportActionBar(binding.bottomAppBar)
 
 
     }
@@ -135,7 +146,7 @@ class MainActivity : BaseActivity() {
         return true
     }
 
-    private fun showNavigationDrawer() {
+     private fun showNavigationDrawer() {
         navigationDrawerBottomSheet.show(
             supportFragmentManager.beginTransaction(),
             navigationDrawerBottomSheet.tag

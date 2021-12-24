@@ -69,7 +69,7 @@ class NavigationDrawerBottomSheet @Inject constructor() : BottomSheetDialogFragm
 
 
     private fun shareApplication() {
-        val page = "https://github.com/SudoAjay"
+        val page = "https://github.com/SudoAjay/Marvel-Universe"
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(page)
         startActivity(i)
