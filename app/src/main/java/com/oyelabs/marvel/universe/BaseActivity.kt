@@ -24,8 +24,7 @@ open class BaseActivity : AppCompatActivity() {
     lateinit var protoManager: ProtoManager
     private var TAG = "BaseActivityTAG"
 
-    private  var currentTheme: String? = null
-
+    var currentTheme: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDataFromProtoDatastoreAndSetTheme()
@@ -101,7 +100,6 @@ open class BaseActivity : AppCompatActivity() {
         }
 
     }
-
     private fun setDarkMode(isDarkMode: Boolean) {
         if (isDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -109,25 +107,11 @@ open class BaseActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
-
-
     private fun isSunset(): Boolean {
         val rightNow: Calendar = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
         return hour < 6 || hour > 18
     }
 
-    private fun isSystemDefaultOn(): Boolean {
-        return resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun isPowerSaveMode(): Boolean {
-        val powerManager =
-            getSystemService(Context.POWER_SERVICE) as PowerManager
-        return powerManager.isPowerSaveMode
-
-    }
 
 }

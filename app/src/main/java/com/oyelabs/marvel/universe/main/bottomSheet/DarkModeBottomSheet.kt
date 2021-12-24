@@ -1,6 +1,5 @@
 package com.oyelabs.marvel.universe.main.bottomSheet
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,17 +9,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.LayoutDarkModeBottomSheetBinding
 import com.oyelabs.marvel.universe.main.MainActivity
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class DarkModeBottomSheet @Inject constructor() : BottomSheetDialogFragment() {
-
+class DarkModeBottomSheet(private var mainActivity: MainActivity) : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
 
         val myDrawerView = layoutInflater.inflate(R.layout.layout_dark_mode_bottom_sheet, null)
         val binding = LayoutDarkModeBottomSheetBinding.inflate(
@@ -37,27 +38,18 @@ class DarkModeBottomSheet @Inject constructor() : BottomSheetDialogFragment() {
 
 
     fun getValue(): String {
-        return requireContext().getSharedPreferences("state", Context.MODE_PRIVATE)
-            .getString(
-                getString(R.string.dark_mode_text), getString(R.string.system_default_text)
-            )
-            .toString()
+        return if (mainActivity.currentTheme!!.isEmpty()) getString(R.string.system_default_text) else mainActivity.currentTheme!!
     }
 
     fun setValue(value: String) {
-        if (getValue() == value) dismiss()
-        else {
-            requireContext().getSharedPreferences("state", Context.MODE_PRIVATE).edit()
-                .putString(
-                    getString(R.string.dark_mode_text), value
-                ).apply()
-
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            requireActivity().finish()
-            startActivity(intent)
-
-
+        CoroutineScope(Dispatchers.IO).launch {
+            mainActivity.protoManager.setCurrentTheme(value)
         }
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        requireActivity().finish()
+        startActivity(intent)
+
+
     }
 
 

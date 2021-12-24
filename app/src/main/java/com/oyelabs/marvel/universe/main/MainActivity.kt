@@ -38,7 +38,6 @@ class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var navigationDrawerBottomSheet : NavigationDrawerBottomSheet
-    @Inject
     lateinit var darkModeBottomSheet:DarkModeBottomSheet
 
 
@@ -52,7 +51,6 @@ class MainActivity : BaseActivity() {
                 WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
                     true
             }
-
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewmodel = viewModel
@@ -62,6 +60,9 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        darkModeBottomSheet = DarkModeBottomSheet(this)
+
         setReference()
     }
 
