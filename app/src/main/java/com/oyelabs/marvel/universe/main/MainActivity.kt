@@ -60,16 +60,7 @@ class MainActivity : BaseActivity() {
         }
 
 
-        //         Setup BottomAppBar Navigation Setup
-        binding.bottomAppBar.navigationIcon?.mutate()?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.setTint(
-                    ContextCompat.getColor(applicationContext, R.color.colorAccent)
-                )
-            }
-            binding.bottomAppBar.navigationIcon = it
-        }
-        setSupportActionBar(binding.bottomAppBar)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -21,8 +22,9 @@ import javax.inject.Inject
 open class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var protoManager: ProtoManager
+    private var TAG = "BaseActivityTAG"
 
-    private lateinit var currentTheme: String
+    private  var currentTheme: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +35,12 @@ open class BaseActivity : AppCompatActivity() {
 
         protoManager.dataStoreStatePreferences.data.asLiveData().observe(this) {
             lifecycleScope.launch {
-                if (it.currentTheme == "")
+                if (it.currentTheme.isEmpty())
                     protoManager.setDefaultValue()
             }
             currentTheme = it.currentTheme
-            setAppTheme(currentTheme)
+            setAppTheme(currentTheme!!)
+            Log.e(TAG , currentTheme + "Here we go  -  + - " + it.currentTheme + " --- 2" )
         }
 
     }
@@ -64,7 +67,6 @@ open class BaseActivity : AppCompatActivity() {
     private fun setAppTheme(currentTheme: String) {
         when (currentTheme) {
             getString(R.string.off_text) -> {
-                setValue(false)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             getString(
@@ -74,13 +76,12 @@ open class BaseActivity : AppCompatActivity() {
                 R.string.set_by_battery_saver_text
             ) -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    setValue(isPowerSaveMode())
                     AppCompatDelegate.setDefaultNightMode(
                         AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
                     )
 
                 } else {
-                    setValue(true)
+
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
 
@@ -88,13 +89,13 @@ open class BaseActivity : AppCompatActivity() {
             getString(
                 R.string.system_default_text
             ) -> {
-                setValue(isSystemDefaultOn())
+
                 AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
                 )
             }
             else -> {
-                setValue(true)
+
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
@@ -102,7 +103,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun setDarkMode(isDarkMode: Boolean) {
-        setValue(isDarkMode)
         if (isDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
@@ -116,13 +116,6 @@ open class BaseActivity : AppCompatActivity() {
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
         return hour < 6 || hour > 18
     }
-
-
-    private fun setValue(isDarkMode: Boolean) {
-        getSharedPreferences("state", Context.MODE_PRIVATE).edit()
-            .putBoolean(getString(R.string.is_dark_mode_text), isDarkMode).apply()
-    }
-
 
     private fun isSystemDefaultOn(): Boolean {
         return resources.configuration.uiMode and

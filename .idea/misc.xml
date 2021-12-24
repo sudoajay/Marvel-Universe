@@ -5,8 +5,10 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.4361111111111111" />
         <entry key="app/src/main/res/drawable/ic_dark_mode.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/ic_navigation_drawer.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/selector.xml" value="0.36875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/menu/bottom_toolbar_menu.xml" value="0.35260416666666666" />
       </map>
