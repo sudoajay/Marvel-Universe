@@ -3,10 +3,11 @@
 
     <!--    App Theme Color-->
     <color name="colorPrimaryDark">#121212</color>
-    <color name="colorPrimary">#121212</color>
+    <color name="colorPrimary">#272727</color>
     <color name="colorAccent">#74A0EE</color>
 
     <!--  Main  Activity-->
+    <color name="statsBarColor">#121212</color>
     <color name="bgBoxColor">#171717</color>
     <color name="mainBgColor">#121212</color>
     <color name="headingNormalTextColor">#dae1e7</color>

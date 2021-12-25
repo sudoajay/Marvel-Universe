@@ -5,6 +5,8 @@
     <color name="colorAccent">#41a9e4</color>
 
 <!--    Main Activity-->
+    <color name="statsBarColor">#ffffff</color>
+
     <color name="bgBoxColor">#ffffff</color>
     <color name="mainBgColor">#59FFFFFF</color>
     <color name="headingNormalTextColor">#353131</color>

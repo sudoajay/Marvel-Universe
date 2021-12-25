@@ -6,7 +6,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/bgBoxColor</item>
+        <item name="android:statusBarColor">@color/statsBarColor</item>
     </style>
 
     <style name="ProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
