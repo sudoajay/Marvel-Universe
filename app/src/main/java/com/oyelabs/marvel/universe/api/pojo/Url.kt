@@ -1,4 +1,4 @@
-package com.oyelabs.marvel.universe.main.api.source.dto
+package com.oyelabs.marvel.universe.api.pojo
 
 import com.google.gson.annotations.SerializedName
 

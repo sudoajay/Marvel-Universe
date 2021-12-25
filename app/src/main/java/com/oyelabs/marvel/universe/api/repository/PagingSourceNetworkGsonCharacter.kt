@@ -1,22 +1,19 @@
-package com.oyelabs.marvel.universe.main.api.repository
+package com.oyelabs.marvel.universe.api.repository
 
-import android.content.Context
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
-import com.oyelabs.marvel.universe.R
-import com.oyelabs.marvel.universe.helper.Toaster
-import com.oyelabs.marvel.universe.main.api.MarvelApiInterface
-import com.oyelabs.marvel.universe.main.api.MarvelApiInterface.Companion.STARTING_PAGE_INDEX
-import com.oyelabs.marvel.universe.main.api.source.dto.Result
+import com.oyelabs.marvel.universe.api.MarvelApiInterface
+import com.oyelabs.marvel.universe.api.MarvelApiInterface.Companion.STARTING_PAGE_INDEX
+import com.oyelabs.marvel.universe.api.pojo.character.CharacterResult
 import java.io.IOException
 
-class PagingSourceNetworkGson(
+class PagingSourceNetworkGsonCharacter(
     private val marvelApiInterface: MarvelApiInterface
-) : PagingSource<Int , Result>() {
+) : PagingSource<Int , CharacterResult>() {
     var TAG = "PagingSourceNetworkGsonTAG"
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int,Result> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterResult> {
         Log.e(TAG , "Page=  response.data.count ")
         //for first case it will be null, then we can pass some default value, in our case it's 1
         val page = params.key ?: STARTING_PAGE_INDEX
@@ -39,7 +36,7 @@ class PagingSourceNetworkGson(
     }
 
 
-    override fun getRefreshKey(state: PagingState<Int,Result>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, CharacterResult>): Int? {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:

@@ -78,6 +78,7 @@
 
 <!--    Marvel Character-->
     <string name="noDescription_text">This character has no description. </string>
+    <string name="comic_text">Comics</string>
 
 
 </resources>

@@ -2,7 +2,8 @@ package com.oyelabs.marvel.universe.main.di
 
 import android.content.Context
 import com.oyelabs.marvel.universe.main.proto.ProtoManager
-import com.oyelabs.marvel.universe.main.ui.repository.PersonPagingAdapterGson
+import com.oyelabs.marvel.universe.main.ui.repository.CharacterPagingAdapterGson
+import com.oyelabs.marvel.universe.scrolling.ui.repository.ComicPagingAdapterGson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,8 +22,12 @@ object ModuleProvides {
 
     @Singleton
     @Provides
-    fun providesPersonPagingAdapterGson( @ApplicationContext appContext: Context): PersonPagingAdapterGson = PersonPagingAdapterGson(appContext)
+    fun providesCharacterPagingAdapterGson( @ApplicationContext appContext: Context): CharacterPagingAdapterGson = CharacterPagingAdapterGson(appContext)
 
+
+    @Singleton
+    @Provides
+    fun providesComicPagingAdapterGson( @ApplicationContext appContext: Context): ComicPagingAdapterGson = ComicPagingAdapterGson(appContext)
 
 }
 

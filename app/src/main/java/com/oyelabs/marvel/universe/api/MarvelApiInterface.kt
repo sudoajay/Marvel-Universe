@@ -1,13 +1,12 @@
-package com.oyelabs.marvel.universe.main.api
+package com.oyelabs.marvel.universe.api
 
-import com.oyelabs.marvel.universe.main.api.source.dto.CharactersList
+import com.oyelabs.marvel.universe.api.pojo.character.CharactersList
+import com.oyelabs.marvel.universe.api.pojo.characterComic.CharacterComic
 import retrofit2.http.GET
-import retrofit2.Call
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.math.BigInteger
-import java.security.Key
 import java.security.MessageDigest
-import java.sql.Time
 import java.sql.Timestamp
 
 
@@ -20,8 +19,19 @@ interface MarvelApiInterface {
         @Query("apikey")apiKey: String = PUBLIC_KEY,
         @Query("hash")hash: String = hash(),
         @Query("offset")offset:Int
-        ):CharactersList
+        ): CharactersList
 
+    @GET("/v1/public/characters/{characterId}/comics")
+    suspend fun getCharactersComics(
+        @Path(
+            value = "characterId",
+            encoded = true
+        ) characterId: Int,
+        @Query("ts")ts:String = Time_Stamp,
+        @Query("apikey")apiKey: String = PUBLIC_KEY,
+        @Query("hash")hash: String = hash(),
+        @Query("offset")offset:Int
+    ): CharacterComic
 
     companion object{
         const val Base_URL = "https://gateway.marvel.com"
@@ -30,7 +40,7 @@ interface MarvelApiInterface {
         const val PRIVATE_KEY = "4765a2ddf79679809efdff68baf6763154fb7275"
 
         const val NETWORK_PAGE_SIZE = 10
-        const val STARTING_PAGE_INDEX = 1
+        const val STARTING_PAGE_INDEX = 0
         fun hash():String{
             val input = "$Time_Stamp$PRIVATE_KEY$PUBLIC_KEY"
             val md = MessageDigest.getInstance("MD5")

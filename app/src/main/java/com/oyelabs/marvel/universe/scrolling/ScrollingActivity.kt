@@ -5,8 +5,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
@@ -14,14 +17,28 @@ import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityScrollingBinding
 import com.oyelabs.marvel.universe.scrolling.model.CharacterInfo
-import java.util.*
+import com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel
+import com.oyelabs.marvel.universe.main.ui.repository.CharacterPagingAdapterGson
+import com.oyelabs.marvel.universe.scrolling.ui.repository.ComicPagingAdapterGson
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.math.abs
 
-
+@AndroidEntryPoint
 class ScrollingActivity : BaseActivity() {
+
+    val viewModel: ScrollingViewModel by viewModels()
+    @Inject
+    lateinit var comicPagingAdapterGson: ComicPagingAdapterGson
+
+
     private lateinit var binding: ActivityScrollingBinding
     private var isDarkTheme: Boolean = false
     private lateinit var characterInfo: CharacterInfo
+
+
 
     var TAG = "ScrollingActivityTAG"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,14 +57,19 @@ class ScrollingActivity : BaseActivity() {
 
 
         characterInfo = CharacterInfo(
-            Integer.parseInt(intent.getStringExtra("id")?:"1"), intent.getStringExtra("name")?:"error",
-            intent.getStringExtra("imageUrl")?:"error", intent.getStringExtra("url")?:"error"
+            (intent.getStringExtra("id")?.toLong()?:1  ),
+            intent.getStringExtra("name") ?: "error",
+            intent.getStringExtra("imageUrl") ?: "error",
+            intent.getStringExtra("url") ?: "error"
         )
+        Log.e(TAG , "Id  - ${characterInfo.id}   id - ${intent.getStringExtra("id")}")
+        viewModel.id = characterInfo.id.toInt()
+        lifecycleScope.launch {
 
+        }
     }
 
     override fun onResume() {
-        super.onResume()
 
 
         setSupportActionBar(binding.toolbar)
@@ -75,17 +97,32 @@ class ScrollingActivity : BaseActivity() {
             }
         })
 
+        setRecyclerView()
 
+        super.onResume()
     }
 
     private fun setRecyclerView() {
         binding.include.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.include.recyclerView.setHasFixedSize(true)
-//        binding.include.recyclerView.adapter = personPagingAdapterGson
+
+        binding.include.recyclerView.adapter = comicPagingAdapterGson
+
+        callData()
 
     }
 
-    private fun openUrl(){
+    private fun callData() {
+        lifecycleScope.launch {
+            viewModel.getPagingGsonSourceWithNetwork()
+                .collectLatest { pagingData ->
+                    Log.e(TAG , "Here the value")
+                    comicPagingAdapterGson.submitData(pagingData = pagingData)
+                }
+        }
+    }
+
+    private fun openUrl() {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,

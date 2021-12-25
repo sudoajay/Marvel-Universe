@@ -6,36 +6,34 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.oyelabs.marvel.universe.databinding.LayoutPersonGridListBinding
-import com.oyelabs.marvel.universe.main.api.source.dto.Result
+import com.oyelabs.marvel.universe.api.pojo.character.CharacterResult
 import javax.inject.Inject
 
 
-class PersonPagingAdapterGson @Inject constructor(var context: Context
+class CharacterPagingAdapterGson @Inject constructor(var context: Context
 ) :
-    PagingDataAdapter<Result, PersonViewHolder>(Person_COMPARATOR) {
-
-
+    PagingDataAdapter<CharacterResult, CharacterViewHolder>(Person_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        PersonViewHolder(
+        CharacterViewHolder(
             context,
             LayoutPersonGridListBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
 
-    override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
 
 
     companion object {
-        private val Person_COMPARATOR = object : DiffUtil.ItemCallback<Result>() {
-            override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean =
+        private val Person_COMPARATOR = object : DiffUtil.ItemCallback<CharacterResult>() {
+            override fun areItemsTheSame(oldItem: CharacterResult, newItem: CharacterResult): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean =
+            override fun areContentsTheSame(oldItem: CharacterResult, newItem: CharacterResult): Boolean =
                 oldItem == newItem
         }
     }

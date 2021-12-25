@@ -1,15 +1,15 @@
-package com.oyelabs.marvel.universe.main.api.source.dto
+package com.oyelabs.marvel.universe.api.pojo.characterComic
 
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.oyelabs.marvel.universe.api.pojo.Thumbnail
+import com.oyelabs.marvel.universe.api.pojo.Url
 import java.io.Serializable
 
-data class Result(
-
+data class ComicResult(
     @SerializedName("id")
     val id: Int,
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("title")
+    val title: String,
     @SerializedName("description")
     val description: String,
     @SerializedName("thumbnail")
@@ -17,5 +17,3 @@ data class Result(
     @SerializedName("urls")
     val urls: List<Url>
 ): Serializable
-
-

@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
@@ -20,7 +19,7 @@ import com.oyelabs.marvel.universe.databinding.ActivityMainBinding
 import com.oyelabs.marvel.universe.helper.Toaster
 import com.oyelabs.marvel.universe.main.bottomSheet.DarkModeBottomSheet
 import com.oyelabs.marvel.universe.main.bottomSheet.NavigationDrawerBottomSheet
-import com.oyelabs.marvel.universe.main.ui.repository.PersonPagingAdapterGson
+import com.oyelabs.marvel.universe.main.ui.repository.CharacterPagingAdapterGson
 import com.oyelabs.marvel.universe.main.ui.viewModel.MainViewModel
 import com.oyelabs.marvel.universe.sendFeedback.SendFeedback
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +41,7 @@ class MainActivity : BaseActivity() {
     private var doubleBackToExitPressedOnce = false
 
     @Inject
-    lateinit var personPagingAdapterGson: PersonPagingAdapterGson
+    lateinit var characterPagingAdapterGson: CharacterPagingAdapterGson
 
     @Inject
     lateinit var navigationDrawerBottomSheet: NavigationDrawerBottomSheet
@@ -107,7 +106,7 @@ class MainActivity : BaseActivity() {
     private fun setRecyclerView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = personPagingAdapterGson
+        binding.recyclerView.adapter = characterPagingAdapterGson
         refreshData()
     }
 
@@ -115,7 +114,7 @@ class MainActivity : BaseActivity() {
         lifecycleScope.launch {
             viewModel.getPagingGsonSourceWithNetwork()
                 .collectLatest { pagingData ->
-                    personPagingAdapterGson.submitData(pagingData)
+                    characterPagingAdapterGson.submitData(pagingData)
 
                 }
         }
@@ -124,8 +123,8 @@ class MainActivity : BaseActivity() {
     private fun refreshData() {
         showProgressAndHideRefresh()
         CoroutineScope(Dispatchers.IO).launch {
-            delay(1000)
             callData()
+            delay(1000)
             viewModel.hideProgress.postValue(true)
         }
 
