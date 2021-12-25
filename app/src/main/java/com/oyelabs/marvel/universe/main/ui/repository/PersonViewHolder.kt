@@ -2,12 +2,15 @@ package com.oyelabs.marvel.universe.main.ui.repository
 
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.LayoutPersonGridListBinding
 import com.oyelabs.marvel.universe.main.api.source.dto.Result
+import com.oyelabs.marvel.universe.scrolling.ScrollingActivity
 
 
 class PersonViewHolder(
@@ -25,6 +28,11 @@ class PersonViewHolder(
             if (result.description.isBlank()) context.getString(R.string.noDescription_text) else result.description.limitDescription(
                 100
             )
+
+        binding.imgCharacter.setOnClickListener {
+            showMoreAboutCharacter(result)
+        }
+
     }
 
 
@@ -48,6 +56,14 @@ class PersonViewHolder(
             return "${this.substring(firstCharacter, characters)}..."
         }
         return this
+    }
+
+    private fun showMoreAboutCharacter(result: Result) {
+        val gson = Gson()
+        val intent = Intent(context, ScrollingActivity::class.java)
+        intent.putExtra("character", gson.toJson(result))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
     }
 
 

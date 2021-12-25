@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.oyelabs.marvel.universe">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -24,6 +25,7 @@
         </activity>
         <activity android:name=".BaseActivity"/>
         <activity android:name=".sendFeedback.SendFeedback"/>
+        <activity android:name=".scrolling.ScrollingActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -16,6 +16,9 @@
     <!--    Dark Bottom sheet-->
     <dimen name="bootom_sheet_padding_bottom">32dp</dimen>
 
+    <!--    Scrolling Activity-->
+    <dimen name="app_bar_height">220dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

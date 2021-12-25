@@ -6,12 +6,14 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.4361111111111111" />
         <entry key="app/src/main/res/drawable/bottom_sheet_top_effect.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/feedback_background_button.xml" value="0.36875" />
+        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_close_window.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_dark_mode.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_image_small.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_me.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_more_app.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_navigation_drawer.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/ic_open_app.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_rate_us.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/ic_send_feedback.xml" value="0.36875" />
@@ -19,8 +21,11 @@
         <entry key="app/src/main/res/drawable/ic_tick.xml" value="0.36875" />
         <entry key="app/src/main/res/drawable/selector.xml" value="0.36875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2740963855421687" />
+        <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_send_feeback.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_send_feedback.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/ic_back.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/layout_dark_mode_bottom_sheet.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/layout_navigation_drawer_bottom_sheet.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/layout_person_grid_list.xml" value="0.283595922150139" />
