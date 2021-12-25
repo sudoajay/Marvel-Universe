@@ -23,7 +23,7 @@ class PagingSourceNetworkGson(
 
         return try {
             val response = marvelApiInterface.getAllCharacters(offset = page)
-            val characters = response.data.results
+            val characters = response.data.result
             Log.e(TAG , "Page= $page response.data.count ${response.data.count} response.data.total ${response.data.total}")
             LoadResult.Page(
                 data = characters,

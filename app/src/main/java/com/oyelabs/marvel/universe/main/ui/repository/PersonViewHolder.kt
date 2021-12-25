@@ -59,9 +59,12 @@ class PersonViewHolder(
     }
 
     private fun showMoreAboutCharacter(result: Result) {
-        val gson = Gson()
+
         val intent = Intent(context, ScrollingActivity::class.java)
-        intent.putExtra("character", gson.toJson(result))
+        intent.putExtra("id", result.id)
+        intent.putExtra("name", result.name)
+        intent.putExtra("imageUrl", (result.thumbnail.path + "." + result.thumbnail.extension).replace("http", "https"))
+        intent.putExtra("url", result.urls[0].url  )
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
     }

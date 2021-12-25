@@ -4,29 +4,24 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityScrollingBinding
-import com.oyelabs.marvel.universe.main.api.source.dto.Result
+import com.oyelabs.marvel.universe.scrolling.model.CharacterInfo
 import java.util.*
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlin.math.abs
 
 
 class ScrollingActivity : BaseActivity() {
     private lateinit var binding: ActivityScrollingBinding
     private var isDarkTheme: Boolean = false
-    private lateinit var result:Result
+    private lateinit var characterInfo: CharacterInfo
 
     var TAG = "ScrollingActivityTAG"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +38,11 @@ class ScrollingActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_scrolling)
         binding.activity = this
 
-        val gson = Gson()
-        result = gson.fromJson(intent.getStringExtra("character"), Result::class.java)
+
+        characterInfo = CharacterInfo(
+            Integer.parseInt(intent.getStringExtra("id")?:"1"), intent.getStringExtra("name")?:"error",
+            intent.getStringExtra("imageUrl")?:"error", intent.getStringExtra("url")?:"error"
+        )
 
     }
 
@@ -53,7 +51,10 @@ class ScrollingActivity : BaseActivity() {
 
 
         setSupportActionBar(binding.toolbar)
-        binding.openAppFloating.setOnClickListener {  }
+        binding.openAppFloating.setOnClickListener {
+            openUrl()
+
+        }
 
         setImageLoader()
 
@@ -67,7 +68,7 @@ class ScrollingActivity : BaseActivity() {
         binding.appBar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                 //  Collapsed
-                binding.collapsingToolbarLayout.title = result.name
+                binding.collapsingToolbarLayout.title = characterInfo.name
             } else {
                 //Expanded
                 binding.collapsingToolbarLayout.title = ""
@@ -75,12 +76,28 @@ class ScrollingActivity : BaseActivity() {
         })
 
 
+    }
+
+    private fun setRecyclerView() {
+        binding.include.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        binding.include.recyclerView.setHasFixedSize(true)
+//        binding.include.recyclerView.adapter = personPagingAdapterGson
 
     }
 
+    private fun openUrl(){
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(characterInfo.url)
+            )
+        )
+    }
+
     private fun setImageLoader() {
-        val newUrl = (result.thumbnail.path + "." + result.thumbnail.extension).replace("http", "https")
-        Log.e(TAG , "Value  - ${newUrl}")
+        val newUrl =
+            (characterInfo.thumbnail)
+        Log.e(TAG, "Value  - ${newUrl}")
         Glide
             .with(applicationContext)
             .load(newUrl)

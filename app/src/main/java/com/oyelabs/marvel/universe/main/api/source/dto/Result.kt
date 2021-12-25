@@ -1,17 +1,21 @@
 package com.oyelabs.marvel.universe.main.api.source.dto
 
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 data class Result(
-    val comics: Comics,
-    val description: String,
-    val events: Events,
+
+    @SerializedName("id")
     val id: Int,
-    val modified: String,
+    @SerializedName("name")
     val name: String,
-    val resourceURI: String,
-    val series: Series,
-    val stories: Stories,
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("thumbnail")
     val thumbnail: Thumbnail,
+    @SerializedName("urls")
     val urls: List<Url>
-)
+): Serializable
 
 

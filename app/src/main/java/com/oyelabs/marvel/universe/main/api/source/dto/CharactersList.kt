@@ -1,12 +1,10 @@
 package com.oyelabs.marvel.universe.main.api.source.dto
 
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 
 data class CharactersList(
-    val attributionHTML: String,
-    val attributionText: String,
-    val code: Int,
-    val copyright: String,
-    val `data`: Data,
-    val etag: String,
-    val status: String
-)
+    @SerializedName("data")
+    val data: Data
+): Serializable
