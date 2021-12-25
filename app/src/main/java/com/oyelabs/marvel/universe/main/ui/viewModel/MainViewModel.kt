@@ -1,6 +1,7 @@
 package com.oyelabs.marvel.universe.main.ui.viewModel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -19,7 +20,16 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor() : ViewModel() {
 
     var TAG = "MainViewModelTAG"
+    var hideProgress: MutableLiveData<Boolean> = MutableLiveData()
 
+    init {
+        loadHideProgress()
+
+    }
+
+    private fun loadHideProgress() {
+        hideProgress.value = false
+    }
     fun getPagingGsonSourceWithNetwork(): Flow<PagingData<Result>> {
 
         val apiInterface =
@@ -33,6 +43,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
             }
         ).flow.cachedIn(viewModelScope)
     }
+
 
 
 

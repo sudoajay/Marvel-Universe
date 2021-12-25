@@ -54,6 +54,7 @@
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_marginBottom="?attr/actionBarSize"
 
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -61,6 +62,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="@{viewmodel.hideProgress ? View.VISIBLE :View.GONE }"
                 android:scrollbars="vertical" />
 
 
@@ -88,6 +90,7 @@
             app:backgroundTint="@color/bgBoxColor"
             android:onClick="@{() -> activity.showDarkMode()}"
             app:fabSize="normal"
+
             app:layout_anchor="@id/bottomAppBar"
             app:tint="@color/colorAccent"
             android:contentDescription="@string/setting_text" />
@@ -98,6 +101,7 @@
             android:layout_height="@dimen/progress_circular_dimension"
             android:layout_gravity="center"
             android:indeterminate="true"
+            android:visibility="@{viewmodel.hideProgress ? View.GONE :View.VISIBLE }"
             android:theme="@style/ProgressBarTheme"/>
 
 

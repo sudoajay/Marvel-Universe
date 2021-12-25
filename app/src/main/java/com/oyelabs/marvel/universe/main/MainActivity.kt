@@ -3,7 +3,6 @@ package com.oyelabs.marvel.universe.main
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
@@ -14,7 +13,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.filter
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityMainBinding
@@ -29,7 +28,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -76,7 +74,6 @@ class MainActivity : BaseActivity() {
         setReference()
 
 
-
     }
 
     private fun setReference() {
@@ -88,7 +85,7 @@ class MainActivity : BaseActivity() {
         )
 
         binding.swipeRefresh.setOnRefreshListener {
-//            refreshData()
+            refreshData()
         }
 
         //         Setup BottomAppBar Navigation Setup
@@ -108,19 +105,37 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setRecyclerView() {
-        binding.recyclerView.layoutManager =
-            GridLayoutManager(applicationContext, 2, GridLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = personPagingAdapterGson
+        refreshData()
+    }
 
+    private fun callData() {
         lifecycleScope.launch {
             viewModel.getPagingGsonSourceWithNetwork()
                 .collectLatest { pagingData ->
                     personPagingAdapterGson.submitData(pagingData)
+
                 }
+        }
+    }
+
+    private fun refreshData() {
+        showProgressAndHideRefresh()
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(1000)
+            callData()
+            viewModel.hideProgress.postValue(true)
         }
 
 
+    }
+
+    private fun showProgressAndHideRefresh() {
+        if (binding.swipeRefresh.isRefreshing)
+            binding.swipeRefresh.isRefreshing = false
+        viewModel.hideProgress.value = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -171,7 +186,7 @@ class MainActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> showNavigationDrawer()
-            R.id.refresh_optionMenu -> {}
+            R.id.refresh_optionMenu -> refreshData()
             R.id.sendFeedBack_optionMenu -> startActivity(
                 Intent(
                     applicationContext,
