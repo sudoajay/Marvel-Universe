@@ -1,24 +1,24 @@
 package com.oyelabs.marvel.universe.main.ui.repository
 
 
+import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.LayoutPersonGridListBinding
-import com.oyelabs.marvel.universe.main.MainActivity
-import com.oyelabs.marvel.universe.main.api.model.MarvelCharacter
+import com.oyelabs.marvel.universe.main.api.source.dto.Result
 
 
 class PersonViewHolder(
-    private val mainActivity: MainActivity,
+    private val context: Context,
     private val binding: LayoutPersonGridListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(marvelCharacter: MarvelCharacter ) {
-        setImageLoader(marvelCharacter.thumbnail)
+    fun bind(result: Result ) {
+        setImageLoader(result.thumbnail.path+result.thumbnail.extension)
 
-        binding.personTextView.text = marvelCharacter.name
+        binding.personTextView.text = result.name
 
     }
     
@@ -26,7 +26,7 @@ class PersonViewHolder(
     private fun setImageLoader(url: String) {
 
         Glide
-            .with(mainActivity)
+            .with(context)
             .load(url)
             .centerCrop()
             .override(120, 120)

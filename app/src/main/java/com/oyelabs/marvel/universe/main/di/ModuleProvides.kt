@@ -2,6 +2,7 @@ package com.oyelabs.marvel.universe.main.di
 
 import android.content.Context
 import com.oyelabs.marvel.universe.main.proto.ProtoManager
+import com.oyelabs.marvel.universe.main.ui.repository.PersonPagingAdapterGson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,10 @@ object ModuleProvides {
     @Provides
     fun providesProtoManger( @ApplicationContext appContext: Context): ProtoManager = ProtoManager(appContext)
 
+
+    @Singleton
+    @Provides
+    fun providesPersonPagingAdapterGson( @ApplicationContext appContext: Context): PersonPagingAdapterGson = PersonPagingAdapterGson(appContext)
 
 
 }

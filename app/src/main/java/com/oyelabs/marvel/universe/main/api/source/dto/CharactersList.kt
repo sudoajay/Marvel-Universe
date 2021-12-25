@@ -1,5 +1,6 @@
 package com.oyelabs.marvel.universe.main.api.source.dto
 
+
 data class CharactersList(
     val attributionHTML: String,
     val attributionText: String,

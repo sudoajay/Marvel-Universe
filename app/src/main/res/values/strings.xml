@@ -71,5 +71,10 @@
     <string name="set_by_battery_saver_trans_text">Set by battery saver</string>
     <string name="system_default_trans_text">System Default</string>
 
+<!--    Error-->
+    <string name="somethingWentWrong_text">Something Went Wrong</string>
+    <string name="noInternetConnection_text">No Internet Connection</string>
+
+
 
 </resources>

@@ -3,6 +3,7 @@ package com.oyelabs.marvel.universe.main
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
@@ -11,20 +12,22 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityMainBinding
-import com.oyelabs.marvel.universe.databinding.LayoutDarkModeBottomSheetBinding
 import com.oyelabs.marvel.universe.helper.Toaster
 import com.oyelabs.marvel.universe.main.bottomSheet.DarkModeBottomSheet
 import com.oyelabs.marvel.universe.main.bottomSheet.NavigationDrawerBottomSheet
-import com.oyelabs.marvel.universe.main.viewModel.MainViewModel
+import com.oyelabs.marvel.universe.main.ui.repository.PersonPagingAdapterGson
+import com.oyelabs.marvel.universe.main.ui.viewModel.MainViewModel
 import com.oyelabs.marvel.universe.sendFeedback.SendFeedback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -32,14 +35,18 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
+    val TAG = "MainActivityTAG"
     val viewModel: MainViewModel by viewModels()
     lateinit var binding: ActivityMainBinding
     private var isDarkTheme: Boolean = false
     private var doubleBackToExitPressedOnce = false
 
     @Inject
-    lateinit var navigationDrawerBottomSheet : NavigationDrawerBottomSheet
-    lateinit var darkModeBottomSheet:DarkModeBottomSheet
+    lateinit var personPagingAdapterGson: PersonPagingAdapterGson
+
+    @Inject
+    lateinit var navigationDrawerBottomSheet: NavigationDrawerBottomSheet
+    lateinit var darkModeBottomSheet: DarkModeBottomSheet
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +72,14 @@ class MainActivity : BaseActivity() {
         darkModeBottomSheet = DarkModeBottomSheet(this)
 
         setReference()
+
+
+        lifecycleScope.launch {
+            viewModel.getPagingGsonSourceWithNetwork()
+                .map {
+                    Log.e(TAG, "here Data sumbit at paging souce")
+                }
+        }
     }
 
     private fun setReference() {
@@ -90,7 +105,17 @@ class MainActivity : BaseActivity() {
         }
         setSupportActionBar(binding.bottomAppBar)
 
-        var gridlayout = GridLayoutManager(applicationContext,2,GridLayoutManager.VERTICAL,false)
+
+        setRecyclerView()
+
+    }
+
+    private fun setRecyclerView() {
+        binding.recyclerView.layoutManager =
+            GridLayoutManager(applicationContext, 2, GridLayoutManager.VERTICAL, false)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = personPagingAdapterGson
+
 
 
     }
@@ -124,6 +149,7 @@ class MainActivity : BaseActivity() {
             }
         })
     }
+
     private fun manageInputTextInSearchView(searchView: SearchView) {
         searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
@@ -133,7 +159,7 @@ class MainActivity : BaseActivity() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 val query: String = newText.lowercase(Locale.ROOT).trim { it <= ' ' }
-                viewModel.searchValue = query
+
                 return true
             }
         })
@@ -143,26 +169,31 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             android.R.id.home -> showNavigationDrawer()
             R.id.refresh_optionMenu -> {}
-            R.id.sendFeedBack_optionMenu->startActivity(Intent(applicationContext, SendFeedback::class.java))
+            R.id.sendFeedBack_optionMenu -> startActivity(
+                Intent(
+                    applicationContext,
+                    SendFeedback::class.java
+                )
+            )
             else -> return super.onOptionsItemSelected(item)
         }
 
         return true
     }
 
-     private fun showNavigationDrawer() {
+    private fun showNavigationDrawer() {
         navigationDrawerBottomSheet.show(
             supportFragmentManager.beginTransaction(),
             navigationDrawerBottomSheet.tag
         )
     }
-    fun showDarkMode(){
+
+    fun showDarkMode() {
         darkModeBottomSheet.show(
             supportFragmentManager.beginTransaction(),
             darkModeBottomSheet.tag
         )
     }
-
 
 
     override fun onBackPressed() {

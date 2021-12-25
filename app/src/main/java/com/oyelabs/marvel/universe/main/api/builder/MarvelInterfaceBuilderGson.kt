@@ -1,5 +1,6 @@
 package com.oyelabs.marvel.universe.main.api.builder
 
+import android.util.Log
 import com.oyelabs.marvel.universe.main.api.MarvelApiInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,33 +10,22 @@ import java.util.concurrent.TimeUnit
 
 class MarvelInterfaceBuilderGson {
     companion object {
-        var picsumApiInterface: MarvelApiInterface? = null
+        var marvelApiInterface: MarvelApiInterface? = null
         private var okHttpClient: OkHttpClient? = null
-
+        var TAG = "MarvelInterfaceBuilderGsonTAG"
 
         fun getApiInterface(): MarvelApiInterface? {
-            if (picsumApiInterface == null) {
-                //For printing API url and body in logcat
-                val httpLoggingInterceptor = HttpLoggingInterceptor()
-                httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
-                okHttpClient = OkHttpClient.Builder()
-                    .addInterceptor(httpLoggingInterceptor)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .connectTimeout(50, TimeUnit.SECONDS)
-                    .writeTimeout(50, TimeUnit.SECONDS)
-                    .callTimeout(50, TimeUnit.SECONDS)
-                    .build()
+            if (marvelApiInterface == null) {
 
                 val retrofit = Retrofit.Builder()
                     .baseUrl(MarvelApiInterface.Base_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(okHttpClient!!)
                     .build()
-                picsumApiInterface = retrofit.create(MarvelApiInterface::class.java)
+                marvelApiInterface = retrofit.create(MarvelApiInterface::class.java)
+                Log.e(TAG , "Here at Not null")
             }
-
-            return picsumApiInterface
+                Log.e(TAG , "Here at TAg")
+            return marvelApiInterface
         }
 
     }
