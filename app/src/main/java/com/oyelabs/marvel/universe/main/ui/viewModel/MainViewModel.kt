@@ -7,9 +7,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.oyelabs.marvel.universe.helper.PagingSourceNetwork
-import com.oyelabs.marvel.universe.helper.PersonGson
-import com.oyelabs.marvel.universe.helper.PicsumInterfaceBuilderGson
 import com.oyelabs.marvel.universe.main.api.MarvelApiInterface.Companion.NETWORK_PAGE_SIZE
 import com.oyelabs.marvel.universe.main.api.builder.MarvelInterfaceBuilderGson
 import com.oyelabs.marvel.universe.main.api.repository.PagingSourceNetworkGson
@@ -23,50 +20,20 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     var TAG = "MainViewModelTAG"
 
-//    fun getPagingGsonSourceWithNetwork(): Flow<PagingData<Result>> {
-//
-//        val apiInterface =
-//            MarvelInterfaceBuilderGson.getApiInterface()
-//        if(apiInterface == null)
-//            Log.e(TAG , "eroor - ")
-//        else
-//            Log.e(TAG , "Not eroor - ")
-//        return Pager(
-//            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-//            pagingSourceFactory = {
-//                PagingSourceNetworkGson(
-//                    apiInterface!!
-//                )
-//            }
-//        ).flow.cachedIn(viewModelScope)
-//    }
-
-    fun getPagingGsonSourceWithNetwork(): Flow<PagingData<PersonGson>> {
+    fun getPagingGsonSourceWithNetwork(): Flow<PagingData<Result>> {
 
         val apiInterface =
-            PicsumInterfaceBuilderGson.getApiInterface()
-
-
-        val flow = Pager(
-            // Configure how data is loaded by passing additional properties to
-            // PagingConfig, such as prefetchDistance.
-            PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false)
-        ) {
-            PagingSourceNetwork(apiInterface!!)
-        }.flow
-            .cachedIn(viewModelScope)
-
-        val value =  Pager(
+            MarvelInterfaceBuilderGson.getApiInterface()
+        return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
             pagingSourceFactory = {
-                PagingSourceNetwork(
+                PagingSourceNetworkGson(
                     apiInterface!!
                 )
             }
-        ).flow
-        Log.e(TAG , "valuecheck is passing ")
-        return flow
+        ).flow.cachedIn(viewModelScope)
     }
+
 
 
 }

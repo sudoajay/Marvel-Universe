@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
@@ -27,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
@@ -74,12 +76,7 @@ class MainActivity : BaseActivity() {
         setReference()
 
 
-        lifecycleScope.launch {
-            viewModel.getPagingGsonSourceWithNetwork()
-                .map {
-                    Log.e(TAG, "here Data sumbit at paging souce")
-                }
-        }
+
     }
 
     private fun setReference() {
@@ -116,6 +113,12 @@ class MainActivity : BaseActivity() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = personPagingAdapterGson
 
+        lifecycleScope.launch {
+            viewModel.getPagingGsonSourceWithNetwork()
+                .collectLatest { pagingData ->
+                    personPagingAdapterGson.submitData(pagingData)
+                }
+        }
 
 
     }
