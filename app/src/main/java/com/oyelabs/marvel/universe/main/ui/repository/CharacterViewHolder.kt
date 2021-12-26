@@ -10,13 +10,13 @@ import com.bumptech.glide.Glide
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.api.pojo.character.CharacterResult
 import com.oyelabs.marvel.universe.api.pojo.characterComic.ComicResult
-import com.oyelabs.marvel.universe.databinding.LayoutPersonGridListBinding
+import com.oyelabs.marvel.universe.databinding.LayoutPersonListBinding
 import com.oyelabs.marvel.universe.scrolling.ScrollingActivity
 
 
 class CharacterViewHolder(
     private val context: Context,
-    private val binding: LayoutPersonGridListBinding
+    private val binding: LayoutPersonListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     val TAG = "PersonViewHolderTAG"
@@ -30,7 +30,7 @@ class CharacterViewHolder(
                 100
             )
 
-        binding.imgCharacter.setOnClickListener {
+        binding.materialCardView.setOnClickListener {
 
             showMoreAboutCharacter(result)
         }

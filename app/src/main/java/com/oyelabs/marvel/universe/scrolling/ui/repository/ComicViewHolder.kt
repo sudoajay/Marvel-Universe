@@ -10,16 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.api.pojo.characterComic.ComicResult
-import com.oyelabs.marvel.universe.databinding.LayoutPersonGridListBinding
 import androidx.core.content.ContextCompat.startActivity
-
-
-
+import com.oyelabs.marvel.universe.databinding.LayoutPersonListBinding
 
 
 class ComicViewHolder(
     private val context: Context,
-    private val binding: LayoutPersonGridListBinding
+    private val binding: LayoutPersonListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     val TAG = "ComicViewHolderTAG"
@@ -40,7 +37,7 @@ class ComicViewHolder(
         binding.tvDescriptionCharacter.text =
             if (result.description.isNullOrBlank()) context.getString(R.string.noDescription_text) else result.description
 
-        binding.imgCharacter.setOnClickListener {
+        binding.materialCardView.setOnClickListener {
             openUrl(result.urls[0].url)
         }
 

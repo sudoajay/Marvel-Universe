@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.oyelabs.marvel.universe.databinding.LayoutPersonGridListBinding
 import com.oyelabs.marvel.universe.api.pojo.character.CharacterResult
 import com.oyelabs.marvel.universe.api.pojo.characterComic.ComicResult
+import com.oyelabs.marvel.universe.databinding.LayoutPersonListBinding
 import com.oyelabs.marvel.universe.main.ui.repository.CharacterViewHolder
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class ComicPagingAdapterGson @Inject constructor(var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ComicViewHolder(
             context,
-            LayoutPersonGridListBinding.inflate(
+            LayoutPersonListBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
