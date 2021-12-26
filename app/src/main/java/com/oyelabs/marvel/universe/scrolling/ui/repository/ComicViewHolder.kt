@@ -44,7 +44,7 @@ class ComicViewHolder(
             .load(newUrl)
             .placeholder(R.drawable.marvel)
             .error(R.drawable.marvel)
-            .into(binding.imgCharacter);
+            .into(binding.imgCharacter)
 
 
     }

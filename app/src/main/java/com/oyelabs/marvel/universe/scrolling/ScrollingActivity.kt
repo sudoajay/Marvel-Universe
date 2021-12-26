@@ -169,7 +169,7 @@ class ScrollingActivity : BaseActivity() {
             .load(newUrl)
             .placeholder(R.drawable.marvel)
             .error(R.drawable.marvel)
-            .into(binding.appImageImageView);
+            .into(binding.appImageImageView)
 
 
     }
