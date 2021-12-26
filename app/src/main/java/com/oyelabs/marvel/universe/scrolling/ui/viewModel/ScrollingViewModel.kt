@@ -1,5 +1,6 @@
 package com.oyelabs.marvel.universe.scrolling.ui.viewModel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -20,6 +21,16 @@ class ScrollingViewModel @Inject constructor() : ViewModel() {
 
     var TAG = "MainViewModelTAG"
     var id: Int = 0
+    var hideProgress: MutableLiveData<Boolean> = MutableLiveData()
+
+    init {
+        loadHideProgress()
+
+    }
+
+    private fun loadHideProgress() {
+        hideProgress.value = false
+    }
 
 
     fun getPagingGsonSourceWithNetwork(): Flow<PagingData<ComicResult>> {

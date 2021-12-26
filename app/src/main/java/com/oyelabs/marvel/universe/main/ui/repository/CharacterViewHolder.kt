@@ -44,7 +44,6 @@ class CharacterViewHolder(
         Glide
             .with(context)
             .load(newUrl)
-            .override(200, 200)
             .placeholder(R.drawable.marvel)
             .error(R.drawable.marvel)
             .into(binding.imgCharacter);

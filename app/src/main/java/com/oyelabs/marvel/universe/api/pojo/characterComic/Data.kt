@@ -6,8 +6,6 @@ import java.io.Serializable
 
 data class Data(
 
-    @SerializedName("count")
-    val count: Int,
     @SerializedName("limit")
     val limit: Int,
     @SerializedName("offset")

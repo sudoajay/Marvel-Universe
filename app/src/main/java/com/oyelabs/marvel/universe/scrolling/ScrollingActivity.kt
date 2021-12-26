@@ -21,6 +21,9 @@ import com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel
 import com.oyelabs.marvel.universe.main.ui.repository.CharacterPagingAdapterGson
 import com.oyelabs.marvel.universe.scrolling.ui.repository.ComicPagingAdapterGson
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,7 +56,8 @@ class ScrollingActivity : BaseActivity() {
             }
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_scrolling)
-        binding.activity = this
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
 
 
         characterInfo = CharacterInfo(
@@ -64,9 +68,7 @@ class ScrollingActivity : BaseActivity() {
         )
         Log.e(TAG , "Id  - ${characterInfo.id}   id - ${intent.getStringExtra("id")}")
         viewModel.id = characterInfo.id.toInt()
-        lifecycleScope.launch {
 
-        }
     }
 
     override fun onResume() {
@@ -104,7 +106,7 @@ class ScrollingActivity : BaseActivity() {
 
     private fun setRecyclerView() {
         binding.include.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        binding.include.recyclerView.setHasFixedSize(true)
+
 
         binding.include.recyclerView.adapter = comicPagingAdapterGson
 
@@ -113,12 +115,16 @@ class ScrollingActivity : BaseActivity() {
     }
 
     private fun callData() {
-        lifecycleScope.launch {
-            viewModel.getPagingGsonSourceWithNetwork()
-                .collectLatest { pagingData ->
-                    Log.e(TAG , "Here the value")
-                    comicPagingAdapterGson.submitData(pagingData = pagingData)
-                }
+        CoroutineScope(Dispatchers.IO).launch {
+            lifecycleScope.launch {
+                viewModel.getPagingGsonSourceWithNetwork()
+                    .collectLatest { pagingData ->
+                        Log.e(TAG, "Here the value")
+                        comicPagingAdapterGson.submitData(pagingData = pagingData)
+                    }
+            }
+            delay(2000)
+            viewModel.hideProgress.postValue(true)
         }
     }
 
@@ -138,7 +144,6 @@ class ScrollingActivity : BaseActivity() {
         Glide
             .with(applicationContext)
             .load(newUrl)
-            .override(200, 200)
             .placeholder(R.drawable.marvel)
             .error(R.drawable.marvel)
             .into(binding.appImageImageView);

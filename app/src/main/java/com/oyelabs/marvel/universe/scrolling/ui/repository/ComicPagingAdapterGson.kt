@@ -31,7 +31,7 @@ class ComicPagingAdapterGson @Inject constructor(var context: Context
     companion object {
         private val Person_COMPARATOR = object : DiffUtil.ItemCallback<ComicResult>() {
             override fun areItemsTheSame(oldItem: ComicResult, newItem: ComicResult): Boolean =
-                oldItem == newItem
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: ComicResult, newItem: ComicResult): Boolean =
                 oldItem == newItem

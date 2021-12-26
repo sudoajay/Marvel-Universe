@@ -8,8 +8,9 @@
     <data>
 
         <variable
-            name="activity"
-            type="com.oyelabs.marvel.universe.scrolling.ScrollingActivity" />
+            name="viewmodel"
+            type="com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -55,7 +56,7 @@
         <include
             android:id="@+id/include"
             layout="@layout/content_scrolling"
-            bind:activity="@{activity}"/>
+            bind:viewmodel="@{viewmodel}"/>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -68,7 +69,8 @@
             app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_open_app"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/colorAccent"
+            android:contentDescription="TODO" />
 
 
 

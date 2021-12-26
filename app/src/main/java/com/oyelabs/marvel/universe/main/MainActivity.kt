@@ -115,7 +115,6 @@ class MainActivity : BaseActivity() {
             viewModel.getPagingGsonSourceWithNetwork()
                 .collectLatest { pagingData ->
                     characterPagingAdapterGson.submitData(pagingData)
-
                 }
         }
     }
@@ -124,7 +123,7 @@ class MainActivity : BaseActivity() {
         showProgressAndHideRefresh()
         CoroutineScope(Dispatchers.IO).launch {
             callData()
-            delay(1000)
+            delay(2000)
             viewModel.hideProgress.postValue(true)
         }
 

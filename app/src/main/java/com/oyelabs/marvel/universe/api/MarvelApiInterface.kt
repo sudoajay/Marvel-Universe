@@ -18,7 +18,8 @@ interface MarvelApiInterface {
         @Query("ts")ts:String = Time_Stamp,
         @Query("apikey")apiKey: String = PUBLIC_KEY,
         @Query("hash")hash: String = hash(),
-        @Query("offset")offset:Int
+        @Query("offset")offset:Int,
+        @Query("limit")limit:Int=10,
         ): CharactersList
 
     @GET("/v1/public/characters/{characterId}/comics")
@@ -30,7 +31,8 @@ interface MarvelApiInterface {
         @Query("ts")ts:String = Time_Stamp,
         @Query("apikey")apiKey: String = PUBLIC_KEY,
         @Query("hash")hash: String = hash(),
-        @Query("offset")offset:Int
+        @Query("offset")offset:Int,
+        @Query("limit")limit:Int=10
     ): CharacterComic
 
     companion object{

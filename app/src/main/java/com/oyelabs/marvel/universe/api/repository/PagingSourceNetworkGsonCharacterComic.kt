@@ -23,12 +23,13 @@ class PagingSourceNetworkGsonCharacterComic(
         return try {
             val response = marvelApiInterface.getCharactersComics( characterId = id, offset = page)
             val comics = response.data.result
-            Log.e(TAG , "Page= $page response.data.count ${response.data.count} response.data.total ${response.data.total}" +
-                    " respone - ${response.data.result[0].title}")
+            Log.e(TAG , "Page= $page  response.data.total ${response.data.total}" +
+                    " respone - ")
             LoadResult.Page(
                 data = comics,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 10,
-                nextKey = if (response.data.count == response.data.total) null else page + 10
+                nextKey = if (page == response.data.total) null else page +
+                        (if (page + 10 <= response.data.total) 10 else response.data.total - page)
             )
 
         } catch (exception: IOException) {

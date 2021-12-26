@@ -4,9 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
-            name="activity"
-            type="com.oyelabs.marvel.universe.scrolling.ScrollingActivity" />
+            name="viewmodel"
+            type="com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -26,12 +28,11 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/lato"
                 android:text="@string/comic_text"
                 android:textColor="@color/headingNormalTextColor"
                 android:textSize="34sp"
-                app:layout_constraintBottom_toTopOf="@+id/recycler_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 android:scrollbars="vertical"
+                android:visibility="@{viewmodel.hideProgress ? View.VISIBLE :View.GONE }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -55,13 +57,14 @@
                 android:layout_width="@dimen/progress_circular_dimension"
                 android:layout_height="@dimen/progress_circular_dimension"
                 android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:indeterminate="true"
+                android:visibility="@{viewmodel.hideProgress ? View.GONE :View.VISIBLE }"
                 android:theme="@style/ProgressBarTheme"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
