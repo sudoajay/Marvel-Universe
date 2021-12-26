@@ -1,15 +1,19 @@
 package com.oyelabs.marvel.universe.api.repository
 
+import android.content.Context
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
+import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.api.MarvelApiInterface
 import com.oyelabs.marvel.universe.api.MarvelApiInterface.Companion.STARTING_PAGE_INDEX
 import com.oyelabs.marvel.universe.api.pojo.character.CharacterResult
+import com.oyelabs.marvel.universe.helper.Toaster
 import java.io.IOException
 
 class PagingSourceNetworkGsonCharacter(
+    private val context: Context,
     private val marvelApiInterface: MarvelApiInterface,
     private val search:String?
 ) : PagingSource<Int, CharacterResult>() {
@@ -34,8 +38,10 @@ class PagingSourceNetworkGsonCharacter(
             )
 
         } catch (exception: IOException) {
+            Toaster.showToast(context,context.getString(R.string.somethingWentWrong_text))
             return LoadResult.Error(exception)
-        } catch (exception: HttpException) {
+        } catch (exception: retrofit2.HttpException) {
+            Toaster.showToast(context,context.getString(R.string.noInternetConnection_text))
             return LoadResult.Error(exception)
         }
     }

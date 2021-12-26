@@ -1,5 +1,7 @@
 package com.oyelabs.marvel.universe.scrolling.ui.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,13 +19,13 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class ScrollingViewModel @Inject constructor() : ViewModel() {
+class ScrollingViewModel  @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     var TAG = "MainViewModelTAG"
     var id: Int = 0
     var hideProgress: MutableLiveData<Boolean> = MutableLiveData()
     var noData :Boolean = false
-
+    private var _application = application
     init {
         loadHideProgress()
 
@@ -42,6 +44,7 @@ class ScrollingViewModel @Inject constructor() : ViewModel() {
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
             pagingSourceFactory = {
                 PagingSourceNetworkGsonCharacterComic(
+                    _application,
                     apiInterface!!,
                     id = id
                 )

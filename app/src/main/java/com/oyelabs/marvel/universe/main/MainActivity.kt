@@ -121,7 +121,7 @@ class MainActivity : BaseActivity() {
                     )
                     viewModel.noData = true
 
-                }
+                } else viewModel.noData = false
         }
     }
 

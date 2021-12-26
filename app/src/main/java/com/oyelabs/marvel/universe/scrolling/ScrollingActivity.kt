@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
@@ -20,9 +19,8 @@ import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityScrollingBinding
 import com.oyelabs.marvel.universe.helper.Toaster
 import com.oyelabs.marvel.universe.scrolling.model.CharacterInfo
-import com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel
-import com.oyelabs.marvel.universe.main.ui.repository.CharacterPagingAdapterGson
 import com.oyelabs.marvel.universe.scrolling.ui.repository.ComicPagingAdapterGson
+import com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +34,7 @@ import kotlin.math.abs
 class ScrollingActivity : BaseActivity() {
 
     val viewModel: ScrollingViewModel by viewModels()
+
     @Inject
     lateinit var comicPagingAdapterGson: ComicPagingAdapterGson
 
@@ -43,7 +42,6 @@ class ScrollingActivity : BaseActivity() {
     private lateinit var binding: ActivityScrollingBinding
     private var isDarkTheme: Boolean = false
     private lateinit var characterInfo: CharacterInfo
-
 
 
     var TAG = "ScrollingActivityTAG"
@@ -64,12 +62,12 @@ class ScrollingActivity : BaseActivity() {
 
 
         characterInfo = CharacterInfo(
-            (intent.getStringExtra("id")?.toLong()?:1  ),
+            (intent.getStringExtra("id")?.toLong() ?: 1),
             intent.getStringExtra("name") ?: "error",
             intent.getStringExtra("imageUrl") ?: "error",
             intent.getStringExtra("url") ?: "error"
         )
-        Log.e(TAG , "Id  - ${characterInfo.id}   id - ${intent.getStringExtra("id")}")
+        Log.e(TAG, "Id  - ${characterInfo.id}   id - ${intent.getStringExtra("id")}")
         viewModel.id = characterInfo.id.toInt()
 
     }
@@ -123,7 +121,8 @@ class ScrollingActivity : BaseActivity() {
 
         comicPagingAdapterGson.addLoadStateListener { loadState ->
             if (loadState.source.refresh is LoadState.NotLoading && comicPagingAdapterGson.itemCount < 1
-                &&loadState.append.endOfPaginationReached)
+                && loadState.append.endOfPaginationReached
+            )
                 if (!viewModel.noData) {
                     Toaster.showToast(
                         context = applicationContext,
@@ -131,7 +130,7 @@ class ScrollingActivity : BaseActivity() {
                     )
                     viewModel.noData = true
 
-                }
+                } else viewModel.noData = false
         }
 
         callData()
