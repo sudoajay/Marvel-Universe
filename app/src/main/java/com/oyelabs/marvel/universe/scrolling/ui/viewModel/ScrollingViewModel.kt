@@ -22,6 +22,7 @@ class ScrollingViewModel @Inject constructor() : ViewModel() {
     var TAG = "MainViewModelTAG"
     var id: Int = 0
     var hideProgress: MutableLiveData<Boolean> = MutableLiveData()
+    var noData :Boolean = false
 
     init {
         loadHideProgress()

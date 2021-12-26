@@ -10,7 +10,8 @@ import com.oyelabs.marvel.universe.api.pojo.character.CharacterResult
 import java.io.IOException
 
 class PagingSourceNetworkGsonCharacter(
-    private val marvelApiInterface: MarvelApiInterface
+    private val marvelApiInterface: MarvelApiInterface,
+    private val search:String?
 ) : PagingSource<Int, CharacterResult>() {
     var TAG = "PagingSourceNetworkGsonTAG"
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterResult> {
@@ -19,7 +20,7 @@ class PagingSourceNetworkGsonCharacter(
         val page = params.key ?: STARTING_PAGE_INDEX
 
         return try {
-            val response = marvelApiInterface.getAllCharacters(offset = page)
+            val response = marvelApiInterface.getAllCharacters(offset = page, nameStartsWith = search)
             val characters = response.data.result
             Log.e(
                 TAG,

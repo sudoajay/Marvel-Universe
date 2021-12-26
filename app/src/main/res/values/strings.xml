@@ -79,6 +79,11 @@
 <!--    Marvel Character-->
     <string name="noDescription_text">This character has no description. </string>
     <string name="comic_text">Comics</string>
+    
+<!--    RecyclerView-->
+    <string name="characterComicIsEmpty_text">This character has no comics.</string>
+    <string name="characterIsEmpty_text">There is no character with this name.</string>
+
 
 
 </resources>

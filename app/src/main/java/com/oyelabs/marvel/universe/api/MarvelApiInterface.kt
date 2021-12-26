@@ -15,12 +15,13 @@ interface MarvelApiInterface {
 
     @GET("/v1/public/characters")
     suspend fun getAllCharacters(
-        @Query("ts")ts:String = Time_Stamp,
-        @Query("apikey")apiKey: String = PUBLIC_KEY,
-        @Query("hash")hash: String = hash(),
-        @Query("offset")offset:Int,
-        @Query("limit")limit:Int=10,
-        ): CharactersList
+        @Query("ts") ts: String = Time_Stamp,
+        @Query("apikey") apiKey: String = PUBLIC_KEY,
+        @Query("hash") hash: String = hash(),
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int = 10,
+        @Query("nameStartsWith") nameStartsWith: String? = null
+    ): CharactersList
 
     @GET("/v1/public/characters/{characterId}/comics")
     suspend fun getCharactersComics(
@@ -28,14 +29,14 @@ interface MarvelApiInterface {
             value = "characterId",
             encoded = true
         ) characterId: Int,
-        @Query("ts")ts:String = Time_Stamp,
-        @Query("apikey")apiKey: String = PUBLIC_KEY,
-        @Query("hash")hash: String = hash(),
-        @Query("offset")offset:Int,
-        @Query("limit")limit:Int=10
+        @Query("ts") ts: String = Time_Stamp,
+        @Query("apikey") apiKey: String = PUBLIC_KEY,
+        @Query("hash") hash: String = hash(),
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int = 10
     ): CharacterComic
 
-    companion object{
+    companion object {
         const val Base_URL = "https://gateway.marvel.com"
         val Time_Stamp = Timestamp(System.currentTimeMillis()).time.toString()
         const val PUBLIC_KEY = "42f0419e94fca6fd37e8175707d17466"
@@ -43,15 +44,14 @@ interface MarvelApiInterface {
 
         const val NETWORK_PAGE_SIZE = 10
         const val STARTING_PAGE_INDEX = 0
-        fun hash():String{
+        fun hash(): String {
             val input = "$Time_Stamp$PRIVATE_KEY$PUBLIC_KEY"
             val md = MessageDigest.getInstance("MD5")
-            return BigInteger(1,md.digest(input.toByteArray())).toString(16).padStart(32,'0')
+            return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
         }
 
 
     }
-
 
 
 }

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
@@ -28,7 +29,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -108,6 +108,21 @@ class MainActivity : BaseActivity() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = characterPagingAdapterGson
         refreshData()
+
+
+        characterPagingAdapterGson.addLoadStateListener { loadState ->
+            if (loadState.source.refresh is LoadState.NotLoading && characterPagingAdapterGson.itemCount < 1
+                && loadState.append.endOfPaginationReached
+            )
+                if (!viewModel.noData) {
+                    Toaster.showToast(
+                        context = applicationContext,
+                        getString(R.string.characterIsEmpty_text)
+                    )
+                    viewModel.noData = true
+
+                }
+        }
     }
 
     private fun callData() {
@@ -115,6 +130,7 @@ class MainActivity : BaseActivity() {
             viewModel.getPagingGsonSourceWithNetwork()
                 .collectLatest { pagingData ->
                     characterPagingAdapterGson.submitData(pagingData)
+
                 }
         }
     }
@@ -170,12 +186,12 @@ class MainActivity : BaseActivity() {
         searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                return false
+                refreshData()
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                val query: String = newText.lowercase(Locale.ROOT).trim { it <= ' ' }
-
+                viewModel.search = newText
                 return true
             }
         })

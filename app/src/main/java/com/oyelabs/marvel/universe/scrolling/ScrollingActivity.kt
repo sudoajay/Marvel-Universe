@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.oyelabs.marvel.universe.BaseActivity
 import com.oyelabs.marvel.universe.R
 import com.oyelabs.marvel.universe.databinding.ActivityScrollingBinding
+import com.oyelabs.marvel.universe.helper.Toaster
 import com.oyelabs.marvel.universe.scrolling.model.CharacterInfo
 import com.oyelabs.marvel.universe.scrolling.ui.viewModel.ScrollingViewModel
 import com.oyelabs.marvel.universe.main.ui.repository.CharacterPagingAdapterGson
@@ -117,9 +119,20 @@ class ScrollingActivity : BaseActivity() {
 
     private fun setRecyclerView() {
         binding.include.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-
-
         binding.include.recyclerView.adapter = comicPagingAdapterGson
+
+        comicPagingAdapterGson.addLoadStateListener { loadState ->
+            if (loadState.source.refresh is LoadState.NotLoading && comicPagingAdapterGson.itemCount < 1
+                &&loadState.append.endOfPaginationReached)
+                if (!viewModel.noData) {
+                    Toaster.showToast(
+                        context = applicationContext,
+                        getString(R.string.characterIsEmpty_text)
+                    )
+                    viewModel.noData = true
+
+                }
+        }
 
         callData()
 
