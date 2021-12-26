@@ -28,4 +28,7 @@
 <!--    Ui Grid View-->
     <color name="transparentBlack">#9C000000</color>
 
+    <!--    Scrolling-->
+    <color name="scrollingPrimaryColor">#ffffff</color>
+
 </resources>

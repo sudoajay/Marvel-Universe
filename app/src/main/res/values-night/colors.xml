@@ -24,4 +24,8 @@
     <color name="dialogBgColorInfo">#272727</color>
     <color name="systemInfoBgColor">#171717</color>
 
+
+<!--    Scrolling-->
+    <color name="scrollingPrimaryColor">#272727</color>
+
 </resources>

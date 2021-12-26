@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
@@ -87,6 +88,16 @@ class ScrollingActivity : BaseActivity() {
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        binding.toolbar.navigationIcon?.mutate()?.let {
+            it.setTint(
+                ContextCompat.getColor(applicationContext, R.color.headingNormalTextColor)
+            )
+            binding.toolbar.navigationIcon = it
+        }
+
+        binding.collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor)
+        binding.collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor)
 
 
         binding.appBar.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
