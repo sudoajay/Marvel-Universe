@@ -44,7 +44,7 @@ class ScrollingActivity : BaseActivity() {
     private lateinit var characterInfo: CharacterInfo
 
 
-    var TAG = "ScrollingActivityTAG"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,7 +67,7 @@ class ScrollingActivity : BaseActivity() {
             intent.getStringExtra("imageUrl") ?: "error",
             intent.getStringExtra("url") ?: "error"
         )
-        Log.e(TAG, "Id  - ${characterInfo.id}   id - ${intent.getStringExtra("id")}")
+
         viewModel.id = characterInfo.id.toInt()
 
     }
@@ -142,7 +142,7 @@ class ScrollingActivity : BaseActivity() {
             lifecycleScope.launch {
                 viewModel.getPagingGsonSourceWithNetwork()
                     .collectLatest { pagingData ->
-                        Log.e(TAG, "Here the value")
+
                         comicPagingAdapterGson.submitData(pagingData = pagingData)
                     }
             }
@@ -163,7 +163,7 @@ class ScrollingActivity : BaseActivity() {
     private fun setImageLoader() {
         val newUrl =
             (characterInfo.thumbnail)
-        Log.e(TAG, "Value  - ${newUrl}")
+
         Glide
             .with(applicationContext)
             .load(newUrl)

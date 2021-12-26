@@ -33,6 +33,8 @@
         <entry key="app/src/main/res/layout/layout_person_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_system_info.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/menu/bottom_toolbar_menu.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.21145833333333333" />
       </map>
     </option>
   </component>

@@ -34,7 +34,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-    val TAG = "MainActivityTAG"
     val viewModel: MainViewModel by viewModels()
     lateinit var binding: ActivityMainBinding
     private var isDarkTheme: Boolean = false

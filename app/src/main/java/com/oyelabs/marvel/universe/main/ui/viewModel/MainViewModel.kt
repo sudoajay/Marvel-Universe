@@ -23,7 +23,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
-    var TAG = "MainViewModelTAG"
     var hideProgress: MutableLiveData<Boolean> = MutableLiveData()
     var noData :Boolean = false
     var search : String? = null

@@ -19,7 +19,6 @@ class CharacterViewHolder(
     private val binding: LayoutPersonListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    val TAG = "PersonViewHolderTAG"
 
     fun bind(result:CharacterResult) {
         setImageLoader(result.thumbnail.path + "." + result.thumbnail.extension)
@@ -40,7 +39,6 @@ class CharacterViewHolder(
 
     private fun setImageLoader(url: String) {
         val newUrl = url.replace("http", "https")
-        Log.e(TAG, "newUrl - ${newUrl}")
         Glide
             .with(context)
             .load(newUrl)

@@ -22,7 +22,6 @@ import javax.inject.Inject
 open class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var protoManager: ProtoManager
-    private var TAG = "BaseActivityTAG"
 
     var currentTheme: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +38,6 @@ open class BaseActivity : AppCompatActivity() {
             }
             currentTheme = it.currentTheme
             setAppTheme(currentTheme!!)
-            Log.e(TAG , currentTheme + "Here we go  -  + - " + it.currentTheme + " --- 2" )
         }
 
     }

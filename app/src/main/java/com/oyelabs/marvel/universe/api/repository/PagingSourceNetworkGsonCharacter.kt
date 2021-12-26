@@ -17,19 +17,15 @@ class PagingSourceNetworkGsonCharacter(
     private val marvelApiInterface: MarvelApiInterface,
     private val search:String?
 ) : PagingSource<Int, CharacterResult>() {
-    var TAG = "PagingSourceNetworkGsonTAG"
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterResult> {
-        Log.e(TAG, "Page=  response.data.count ")
-        //for first case it will be null, then we can pass some default value, in our case it's 1
+ //for first case it will be null, then we can pass some default value, in our case it's 1
         val page = params.key ?: STARTING_PAGE_INDEX
 
         return try {
             val response = marvelApiInterface.getAllCharacters(offset = page, nameStartsWith = search)
             val characters = response.data.result
-            Log.e(
-                TAG,
-                "Page= $page response.data.count  response.data.total ${response.data.total}"
-            )
+
             LoadResult.Page(
                 data = characters,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 10,
@@ -55,7 +51,7 @@ class PagingSourceNetworkGsonCharacter(
         //  * nextKey == null -> anchorPage is the last page.
         //  * both prevKey and nextKey null -> anchorPage is the initial page, so
         //    just return null.
-        Log.e(TAG, "getRefreshKey ")
+
 
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)

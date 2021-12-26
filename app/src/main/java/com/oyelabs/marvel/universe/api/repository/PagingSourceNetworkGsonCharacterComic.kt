@@ -18,17 +18,14 @@ class PagingSourceNetworkGsonCharacterComic(
     private val marvelApiInterface: MarvelApiInterface,
     private val id:Int
 ) : PagingSource<Int , ComicResult>() {
-    var TAG = "PagingSourceNetworkGsonCharacterComicTAG"
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ComicResult> {
-        Log.e(TAG , "Page=  response.data.count  id , ${id}" )
         //for first case it will be null, then we can pass some default value, in our case it's 1
         val page = params.key ?: STARTING_PAGE_INDEX
 
         return try {
             val response = marvelApiInterface.getCharactersComics( characterId = id, offset = page)
             val comics = response.data.result
-            Log.e(TAG , "Page= $page  response.data.total ${response.data.total}" +
-                    " respone - ")
+
             LoadResult.Page(
                 data = comics,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 10,
@@ -54,7 +51,7 @@ class PagingSourceNetworkGsonCharacterComic(
         //  * nextKey == null -> anchorPage is the last page.
         //  * both prevKey and nextKey null -> anchorPage is the initial page, so
         //    just return null.
-        Log.e(TAG , "getRefreshKey ")
+
 
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)

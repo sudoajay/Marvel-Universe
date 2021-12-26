@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScrollingViewModel  @Inject constructor(application: Application) : AndroidViewModel(application) {
 
-    var TAG = "MainViewModelTAG"
+
     var id: Int = 0
     var hideProgress: MutableLiveData<Boolean> = MutableLiveData()
     var noData :Boolean = false

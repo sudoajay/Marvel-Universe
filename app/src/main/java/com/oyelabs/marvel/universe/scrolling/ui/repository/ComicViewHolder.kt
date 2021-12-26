@@ -19,18 +19,10 @@ class ComicViewHolder(
     private val binding: LayoutPersonListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    val TAG = "ComicViewHolderTAG"
+
 
     fun bind(result: ComicResult) {
-        Log.e(
-            TAG, "Value id - ${result.id}   value title - ${result.title} " +
-                    "value Thumbainal ${
-                        (result.thumbnail.path + "." + result.thumbnail.extension).replace(
-                            "http",
-                            "https"
-                        )
-                    } +   description = ${result.description}"
-        )
+
         setImageLoader(result.thumbnail.path + "." + result.thumbnail.extension)
         binding.tvNameCharacter.text = result.title
 
@@ -46,7 +38,7 @@ class ComicViewHolder(
 
     private fun setImageLoader(url: String) {
         val newUrl = url.replace("http", "https")
-        Log.e(TAG, "newUrl - ${newUrl}")
+
         Glide
             .with(context)
             .load(newUrl)
