@@ -5,7 +5,7 @@ object Versions {
      */
     object Project {
         const val kotlin_version = "1.5.21"
-        const val Android_Gradle_Plugin_version = "7.0.3"
+        const val Android_Gradle_Plugin_version = "7.0.4"
     }
     /**
      * Versions of android main library
